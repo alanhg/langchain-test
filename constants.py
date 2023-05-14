@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from chromadb.config import Settings
+from langchain.embeddings import HuggingFaceEmbeddings
 
 load_dotenv()
 
@@ -10,3 +11,5 @@ CHROMA_SETTINGS = Settings(
     persist_directory='./db',
     anonymized_telemetry=False
 )
+
+EMBEDDINGS_MODEL = HuggingFaceEmbeddings(model_name="GanymedeNil/text2vec-large-chinese")

@@ -7,13 +7,12 @@ from langchain.document_loaders import TextLoader, PDFMinerLoader, CSVLoader, Un
 from langchain.embeddings import OpenAIEmbeddings, HuggingFaceEmbeddings
 from langchain.vectorstores import Chroma
 
-from constants import CHROMA_SETTINGS
-
+from constants import CHROMA_SETTINGS, EMBEDDINGS_MODEL
 
 def main(source_documents):
     print("source_documents:", source_documents)
     # embeddings = OpenAIEmbeddings()
-    embeddings = HuggingFaceEmbeddings(model_name="GanymedeNil/text2vec-large-chinese")
+    embeddings = EMBEDDINGS_MODEL
     documents = []
     for root, dirs, files in os.walk(source_documents):
         for file in files:

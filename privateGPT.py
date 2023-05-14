@@ -1,12 +1,11 @@
 from langchain.chat_models import ChatOpenAI
-from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 from constants import CHROMA_SETTINGS
 from langchain import PromptTemplate
+from constants import CHROMA_SETTINGS, EMBEDDINGS_MODEL
 
-embeddings = HuggingFaceEmbeddings(model_name="GanymedeNil/text2vec-large-chinese")
-
+embeddings = EMBEDDINGS_MODEL
 
 # embeddings = OpenAIEmbeddings()
 
