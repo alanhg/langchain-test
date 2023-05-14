@@ -1,8 +1,9 @@
-from langchain.embeddings import OpenAIEmbeddings, HuggingFaceEmbeddings
+from langchain.chat_models import ChatOpenAI
+from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 from constants import CHROMA_SETTINGS
-from langchain import OpenAI, PromptTemplate
+from langchain import PromptTemplate
 
 embeddings = HuggingFaceEmbeddings(model_name="GanymedeNil/text2vec-large-chinese")
 
@@ -24,9 +25,10 @@ def main():
 
     # 加载持久化DB数据
     db = Chroma(persist_directory="./db", embedding_function=embeddings, client_settings=CHROMA_SETTINGS)
-    retriever = db.as_retriever()
+    retriever = db.as_retriever(search_type="similarity", search_kwargs={"k": 2})
 
-    qa = RetrievalQA.from_chain_type(llm=OpenAI(temperature=0), chain_type="stuff", retriever=retriever,
+    qa = RetrievalQA.from_chain_type(llm=ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.8), chain_type="stuff",
+                                     retriever=retriever,
                                      chain_type_kwargs=chain_type_kwargs,
                                      return_source_documents=False)
     qa.combine_documents_chain.document_prompt = PromptTemplate(
