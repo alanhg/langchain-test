@@ -12,7 +12,7 @@
 ## 数据向量化
 
 ```shell
-ingest.py --source=./source_documents 
+ingest.py --source=./source_documents
 ```
 
 ## 启动FAQ-GPT
@@ -20,3 +20,6 @@ ingest.py --source=./source_documents
 ```shell
 privateGPT.py
 ```
+
+## Docs
+- https://python.langchain.com/en/latest/index.html
